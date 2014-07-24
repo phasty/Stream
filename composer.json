@@ -1,0 +1,19 @@
+{
+    "name" : "phasty/stream",
+    "description" : "PHP stream library",
+    "keywords" : ["php", "stream"],
+    "authors" : [
+        {
+            "name" : "Dmitry Cheremnykh",
+            "email" : "lockalister@gmail.com"
+        }
+    ],
+    "require" : {
+        "phasty/log": "0.1.*@dev"
+    },
+    "autoload" : {
+        "psr-4" : {
+            "Phasty\\Stream\\" : "src"
+        }
+    }
+}
