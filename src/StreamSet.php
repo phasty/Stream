@@ -2,8 +2,6 @@
 namespace Phasty\Stream {
     use \Phasty\Log\File as log;
     class StreamSet {
-        use \Phasty\ClassKit\Instancable;
-
         const MESSAGE_LEN_FIELD_LENGTH_BYTES = 4;
 
         const E_NO_ERROR   = 0x0000;
@@ -22,6 +20,14 @@ namespace Phasty\Stream {
 
         protected $running = false;
         protected $timerSet = null;
+
+        public static function instance() {
+            static $instance = null;
+            if (!$instance instanceof static) {
+                $instance = new static();
+            }
+            return $instance;
+        }
 
         public function listen() {
             $exceptStreams = null;
