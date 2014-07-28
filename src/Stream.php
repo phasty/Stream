@@ -46,6 +46,10 @@ namespace Phasty\Stream {
          */
         public function close() {
             if (!$this->isOpened()) {
+                // In case of stream was closed implicitly
+                if (!is_null($this->resource)) {
+                    $this->trigger("close");
+                }
                 $this->resource = null;
                 return false;
             }

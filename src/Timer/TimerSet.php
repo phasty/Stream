@@ -45,7 +45,9 @@ namespace Phasty\Stream\Timer {
                     break;
                 }
                 $timerInfo = $this->extract();
-                if ($timerInfo->timer->isStopped()) {
+                if ($timerInfo->timer->isCanceled()) {
+                    // simply forget timer, ignore it
+                } elseif ($timerInfo->timer->isStopped()) {
                     $skipped []= $timerInfo->timer;
                 } elseif (isset($this->timers[ $timerInfo->timer ])) {
                     $this->lastExtracted = $timerInfo;

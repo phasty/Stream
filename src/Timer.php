@@ -2,7 +2,8 @@
 namespace Phasty\Stream {
     class Timer extends \Phasty\Events\Eventable {
         protected $time = null;
-        protected $isStopped = false;
+        protected $isStopped  = false;
+        protected $isCanceled = false;
 
         public function __construct($seconds, $microseconds = 0, $callback = null) {
             $this->time = "$seconds." . str_pad($microseconds, 6, "0", STR_PAD_RIGHT);
@@ -23,6 +24,10 @@ namespace Phasty\Stream {
             return $this->isStopped;
         }
 
+        public function isCanceled() {
+            return $this->isCanceled;
+        }
+
         public function start() {
             if (!$this->isStopped) {
                 return false;
@@ -33,12 +38,21 @@ namespace Phasty\Stream {
         }
 
         public function stop() {
-            if (!$this->isStopped) {
-                return true;
+            if ($this->isStopped) {
+                return false;
             }
             $this->isStopped = true;
             $this->trigger("stop");
-            return false;
+            return true;
+        }
+
+        public function cancel() {
+            if ($this->isCanceled) {
+                return false;
+            }
+            $this->isCanceled = true;
+            $this->trigger("cancel");
+            return true;
         }
     }
 }
