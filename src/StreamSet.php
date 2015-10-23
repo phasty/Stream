@@ -1,6 +1,5 @@
 <?php
 namespace Phasty\Stream {
-    use \Phasty\Log\File as log;
     class StreamSet {
         const MESSAGE_LEN_FIELD_LENGTH_BYTES = 4;
 
@@ -40,11 +39,9 @@ namespace Phasty\Stream {
                 }
                 $timerInfo = $this->timerSet->getNearest();
                 $timeout = ($timerInfo ? $timerInfo->time : 1) * 1000000;
-                log::debug("Sleep, read=[".implode(",", array_map("intval", $readStreams))."] Write=[".implode(",", array_map("intval", $writeStreams))."]");
                 if (($streamCount = stream_select($readStreams, $writeStreams, $exceptStreams, 0, $timeout)) === false) {
                     return self::E_STREAM_SELECT_ERROR;
                 }
-                log::debug("Wakeup, read=[".implode(",", array_map("intval", $readStreams))."] Write=[".implode(",", array_map("intval", $writeStreams))."]");
                 if ($streamCount === 0) {
                     if ($timerInfo) {
                         $timerInfo->timer->trigger("tick");
