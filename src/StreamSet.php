@@ -139,5 +139,13 @@ namespace Phasty\Stream {
         public function isRunning() {
             return $this->running;
         }
+
+        public function getReadStreamsCount() {
+            return count($this->streams[ "read" ]);
+        }
+
+        public function getWriteStreamsCount() {
+            return count($this->streams[ "write" ]);
+        }
     }
 }
