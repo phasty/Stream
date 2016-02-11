@@ -44,7 +44,9 @@ namespace Phasty\Stream\Reader {
             $this->selfCreated = false;
             if (!is_dir($dir)) {
                 if (!mkdir($dir, 0777, true)) {
-                    throw new \Exception("Could not create directory $dir");
+                    if (!is_dir($dir)) {
+                        throw new \Exception("Could not create directory $dir");
+                    }
                 }
             }
             // If pipe was not create on another side
