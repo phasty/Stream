@@ -16,7 +16,7 @@ namespace Phasty\Stream\Socket {
             $address = "tcp://$address";
             $stream = stream_socket_server($address, $errno, $errstr);
             if ($stream === false) {
-                throw new Exception("Error ($errno): $errstr");
+                throw new \Exception("Error ($errno): $errstr");
             }
             parent::open($stream);
             $this->setBlocking(false);
