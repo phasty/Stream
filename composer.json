@@ -2,6 +2,12 @@
     "name" : "phasty/stream",
     "description" : "PHP stream library",
     "keywords" : ["php", "stream"],
+    "repositories": [
+        {
+            "type" : "vcs",
+            "url"  : "ssh://git@git.prp.ru:7999/web/phasty-log.git"
+        }
+    ],
     "authors" : [
         {
             "name" : "Dmitry Cheremnykh",
@@ -9,7 +15,7 @@
         }
     ],
     "require" : {
-        "phasty/log"    : "0.1.*@dev",
+        "phasty/log"    : "0.2.*@dev",
         "phasty/events" : "0.1.*@dev"
     },
     "autoload" : {
